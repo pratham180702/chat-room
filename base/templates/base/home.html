@@ -1,38 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="home.css">
-</head>
-<body class="body">
-    {% extends 'main.html' %}
+{% extends 'main.html' %}
 
-    {% block content %}
-    <div class="main-div">
-        <div class="sub-div">
-            <h1 class="heading">This is the main heading of the home page</h1>
-            <a href="{% url 'create-room' %}">Create Room</a>
-        </div>
+{% block content %}
+
+<style>
+    .main-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
+<div class="main-container">
+    <div>
+        <h3>Browse Topics</h3>
+        <hr>
+        <a href="{% url 'home' %}">All</a><br>
+        {% for topic in topics %}
+
+            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a><br>
+        
+        {% endfor %}
     </div>
-    {% for room in rooms %}
+
+
+    <div>
+        <a href="url 'create-room' ">Create Room</a>
+        {% for room in rooms %}
         <div>
-            <h4>
-                <a href="{% url 'update-room' room.id %}">UPDATE Room</a><br>
-                <a href="{% url 'delete-room' room.id %}">Delete Room</a><br>
-                @{{room.host.username}} <br> <br>
-                {{room.id}} --- <a href="{% url 'room' room.id %}">{{room.name}}</a> <br> <br>
-                {{room.topic.name}}
-                <hr>
-
-            </h4>
+            <a href="{% url 'update-room' room.id %}">Update Room</a><br>
+            <a href="{% url 'delete-room' room.id %}">Delete Room</a><br>
+            @{{room.host.username}} <br> <br>
+            {{room.id}} --- <a href="{% url 'room' room.id %}">{{room.name}}</a> <br> <br>
+            <small>{{room.topic.name}}</small>
+            <hr>
         </div>
+        {% endfor %}
+    </div>
 
-    {% endfor %}
-
-    {% endblock %}
-</body>
-</html>
+</div>
 
 
+{% endblock content %}
