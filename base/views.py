@@ -78,6 +78,10 @@ def deleteRoom(request, pk):
     context = {'obj':room}
     return render(request, 'base/delete_room.html',context)
 
+def loginPage(request):
+    context = {}
+    return render(request, 'base/login_registration.html', context)
+
 
 # my added
 def CreateMessage(request):
