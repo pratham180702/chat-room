@@ -6,8 +6,17 @@
     <form method="post" action="">
         {% csrf_token %}
 
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <!-- <li style="color: red;">{{ message }}</li> -->
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+        </u>
+        {% endif %}
+
         <label>Username</label>
-        <input type="text" name="Username" placeholder="Enter Username">
+        <input type="text" name="username" placeholder="Enter Username">
         
         <label>Password</label>
         <input type="password" name="password" placeholder="Enter password">
