@@ -31,7 +31,13 @@ def home(request):
 
     room_count = rooms.count()
     topics = Topic.objects.all()
-    context = {"rooms": rooms, "topics": topics, "room_count": room_count}
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
+    context = {
+        "rooms": rooms,
+        "topics": topics,
+        "room_count": room_count,
+        "room_messages": room_messages,
+    }
     return render(request, "base/home.html", context)
 
 
@@ -58,8 +64,19 @@ def room(request, pk):
     return render(request, "base/room.html", context)
 
 
+def deleteComment(request, pk):
+    message = Message.objects.get(pk=pk)
+
+    if request.method == "POST":
+        message.delete()
+        return redirect("home")
+
+    context = {"obj": message}
+    return render(request, "base/delete_room.html", context)
+
+
 # added by me
-def deleteComment(request, room_pk, message_pk):
+def deleteRoomComment(request, room_pk, message_pk):
     message = Message.objects.get(pk=message_pk)
 
     if request.method == "POST":

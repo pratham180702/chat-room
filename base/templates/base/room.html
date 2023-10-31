@@ -22,7 +22,9 @@
       <p>{{message.body}}</p>
       <!-- added by me -->
       {% if request.user == message.user %}
-      <a href="{% url 'delete-comment' room.id message.id %}">Delete comment</a>
+      <a href="{% url 'delete-room-comment' room.id message.id %}"
+        >Delete comment</a
+      >
       {% endif %}
       <!-- ends here -->
       <hr />
