@@ -20,6 +20,11 @@
     <div>
       <small>@{{message.user}} {{message.created|timesince}} ago</small>
       <p>{{message.body}}</p>
+      <!-- added by me -->
+      {% if request.user == message.user %}
+      <a href="{% url 'delete-comment' room.id message.id %}">Delete comment</a>
+      {% endif %}
+      <!-- ends here -->
       <hr />
     </div>
     {% endfor %}

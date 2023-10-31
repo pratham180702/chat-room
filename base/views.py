@@ -58,6 +58,21 @@ def room(request, pk):
     return render(request, "base/room.html", context)
 
 
+# added by me
+def deleteComment(request, room_pk, message_pk):
+    message = Message.objects.get(pk=message_pk)
+
+    if request.method == "POST":
+        message.delete()
+        return redirect("room", room_pk)
+
+    context = {"obj": message}
+    return render(request, "base/delete_room.html", context)
+
+
+# my added ends here
+
+
 @login_required(login_url="login")
 def CreateRoom(request):
     form = RoomForm()
