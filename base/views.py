@@ -33,14 +33,11 @@ def home(request):
     context = {'rooms':rooms,'topics':topics,'room_count':room_count}
     return render(request, 'base/home.html',context)
 
-# def room_main(request):
-#     context = {'id':0,'name':'MAIN ROOM'}
-#     return render(request,'base/room.html',context)
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    messages = Message.objects.filter(room=room)
-    context = {'room':room, 'messages':messages}
+    
+    context = {'room':room}
     return render(request, 'base/room.html', context)
 
 
@@ -125,11 +122,12 @@ def registerPage(request):
 
         if form.is_valid():
             user = form.save(commit=False)
-        
-        user.username = user.username.lower()
-        user.save()
-        login(request, user)
-        return redirect('home')
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "Incorrect credentials! Can't register!")
 
     form = UserCreationForm()
     return render(request, 'base/login_registration.html', {'form':form})
@@ -139,15 +137,15 @@ def logoutPage(request):
     return redirect('home')
 
 
-# my added
-def CreateMessage(request):
-    form = MessageForm()
-    if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('home')
+# # my added
+# def CreateMessage(request):
+#     form = MessageForm()
+#     if request.method == 'POST':
+#         form = MessageForm(request.POST)
+#         if form.is_valid:
+#             form.save()
+#             return redirect('home')
 
-    context = {'form':form}
-    return render(request, 'base/mess_form.html', context)
+#     context = {'form':form}
+#     return render(request, 'base/mess_form.html', context)
     

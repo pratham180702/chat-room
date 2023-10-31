@@ -1,41 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="home.css">
-</head>
-<body class="body">
-    {% extends 'main.html' %}
+{% extends 'main.html' %}
 
-    {% block content %}
-    <div class="main-div">
-        <div class="sub-div">
-            <h1 class="heading">{{room.name}}</h1>
-        </div>
-    </div>
-    <hr>
-    <div>
-        <h3>{{room.description}}</h3>
-    </div>
-    <hr>
-    <h2>MESSAGES</h2>
-    <h3><a href="{% url 'create-message' %}">Add message</a></h3>
-    <hr>
-    {% for message in messages %}
-        <div>
-            <h3 style="background-color: brown ;">
-                {{message.user}}
-            </h3>
-            <h4>
-                {{message.body}} <hr>
-            </h4>
-        </div>
-
-    {% endfor %}
-    {% endblock %}
-</body>
-</html>
-
-
+{% block content %}
+<h1>{{room.name}}</h1>
+{% endblock content %}
