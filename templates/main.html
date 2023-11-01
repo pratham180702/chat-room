@@ -1,18 +1,17 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>STUDYBUD</title>
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+  </head>
+  <body>
     {% include 'nav.html' %}
 
-    <hr>
+    <hr />
 
-    {% block content %}
-
-    {% endblock %}
-
-</body>
+    {% block content %} {% endblock %}
+  </body>
 </html>

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RoomForm, MessageForm
+from .forms import RoomForm
 from django.db.models import Q
 from django.contrib import messages
 
@@ -112,6 +112,8 @@ def CreateRoom(request):
     if request.method == "POST":
         form = RoomForm(request.POST)
         if form.is_valid:
+            form = form.save(commit=False)
+            form.host = request.user
             form.save()
             return redirect("home")
 
