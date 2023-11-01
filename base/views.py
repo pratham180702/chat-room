@@ -64,6 +64,21 @@ def room(request, pk):
     return render(request, "base/room.html", context)
 
 
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+
+    rooms = user.room_set.all()
+    topics = Topic.objects.all()
+    room_messages = user.message_set.all()
+    context = {
+        "user": user,
+        "rooms": rooms,
+        "topics": topics,
+        "room_messages": room_messages,
+    }
+    return render(request, "base/profile.html", context)
+
+
 def deleteComment(request, pk):
     message = Message.objects.get(pk=pk)
 
